@@ -3,7 +3,7 @@
 from datetime import datetime
 from datetime import timezone
 
-time_format = "%Y-%m-%dT%H:%M:%S.%f"
+time_format = "%Y-%m-%dT%H:%M:%S"
 
 
 
@@ -51,6 +51,12 @@ class Task:
                     val = datetime.strptime(kwargs["updated_at"],
                                             '%Y-%m-%dT%H:%M:%S.%f')
                     val = str(val)
+                if key == "description":
+                    self.description = val
+                if key == "id":
+                    self.id = val
+                if key == "status":
+                    self.status = val
 
     def to_dict(self):
         """returns a dictionary version of the instance
@@ -66,3 +72,12 @@ class Task:
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            id=data['id'],
+            description=data["description"],
+            created_at=datetime.fromisoformat(data['created_at']),
+            updated_at=datetime.fromisoformat(data['updated_at'])
+        )
