@@ -3,18 +3,32 @@
 from datetime import datetime
 from datetime import timezone
 
+time_format = "%Y-%m-%dT%H:%M:%S.%f"
+
+
 
 class Task:
     __no_of_tasks = 0
     
-    def __init__(self, description, status="not done"):
+    def __init__(self, description, *args, **kwargs):
         """ Initializes a Task object """
         Task.__no_of_tasks += 1
-        self.id = self.__no_of_tasks
-        self.status = status
-        self.description = description
-        self.created_at = str(datetime.now(timezone.utc))
-        self.updated_at = self.created_at
+        if kwargs:
+            for key, val in kwargs:
+                if key == "description":
+                    self.description = val
+                if key == "status":
+                    self.status == val
+                if key == "created_at":
+                    self.created_at = datetime.strptime(val, time_format)
+                if key == "updated_at":
+                    self.created_at = datetime.strptime(val, time_format)
+        else:
+            self.id = self.__no_of_tasks
+            self.status = "not done"
+            self.description = description
+            self.created_at = str(datetime.now(timezone.utc))
+            self.updated_at = self.created_at
         
 
     def update(self, *args, **kwargs):
