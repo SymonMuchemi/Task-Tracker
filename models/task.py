@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """ Task module """
-import uuid
 from datetime import datetime
 from datetime import timezone
 
@@ -10,13 +9,13 @@ class Task:
     
     def __init__(self, description, status="not done"):
         """ Initializes a Task object """
-        self.id = str(uuid.uuid4())
+        Task.__no_of_tasks += 1
+        self.id = self.__no_of_tasks
         self.status = status
         self.description = description
         self.created_at = str(datetime.now(timezone.utc))
         self.updated_at = self.created_at
         
-        self.__no_of_tasks += 1
 
     def update(self, *args, **kwargs):
         """updates the instance atttibutes
