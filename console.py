@@ -38,12 +38,15 @@ class TaskCLI(cmd.Cmd):
         if len(args.split()) > 1:
             id = args.split()[0]
             new_description = args.split()[1]
-            task = storage.all(id)
+            print(id)
+            print(new_description)
+            print(storage.all(id))
+            task = Task.from_dict(storage.all(id))
             storage.new(task)
             storage.save()
         
             if task is not None and args is not None:
-                task['description'] = new_description
+                task.update(decription=new_description)
         else:
             print(f"Cannot find task!")
         
