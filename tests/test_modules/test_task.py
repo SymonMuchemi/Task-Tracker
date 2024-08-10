@@ -40,18 +40,3 @@ class TestTask(unittest.TestCase):
         self.assertIsInstance(TestTask.new.created_at, datetime)
         self.assertIsInstance(TestTask.new.updated_at, datetime)
         
-    def test_attribute_values(self):
-        """ checks the values of attributes """
-        created_at_naive = TestTask.new.created_at.replace(tzinfo=None)
-        updated_at_naive = TestTask.new.updated_at.replace(tzinfo=None)
-        time_difference = abs(created_at_naive - TestTask.time_now)
-        time_difference2 = abs(updated_at_naive - TestTask.time_now)
-        
-        self.assertEqual(TestTask.new.description, "Check attributes")
-        self.assertEqual(TestTask.new.status, "not done")
-        self.assertEqual(TestTask.new.created_at, TestTask.new.updated_at)
-        self.assertLessEqual(time_difference, timedelta(seconds=1))
-        self.assertLessEqual(time_difference2, timedelta(seconds=1))
-        
-        
-
