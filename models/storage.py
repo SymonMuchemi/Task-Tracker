@@ -24,18 +24,13 @@ class File_storage:
             obj (dict): object to be added
         """
         if obj is not None:
-            self.all().update(
-                {
-                    obj.to_dict()['description']: obj
-                }
-            )
+            key = obj.description
+            self.__objects[key] = obj
 
     def save(self):
         """save storage to file"""
-        with open(self.__file_path, "w") as file:
-            temp_dict = {}
-            temp_dict.update(File_storage.__objects)
-            for key, val in temp_dict:
-                temp_dict[key] = val.to_dict()
-            json.dump(temp_dict, file)
-            
+        objects = {}
+        for key in self.__objects:
+            objects[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, 'w') as file:
+            json.dump(objects, file)
