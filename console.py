@@ -24,6 +24,7 @@ class TaskCLI(cmd.Cmd):
 
         if len(args) >= 2:
             new_task = Task(description=desc)
+            storage.reload()
             storage.new(new_task)
             storage.save()
 
