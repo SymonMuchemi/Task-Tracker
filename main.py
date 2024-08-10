@@ -2,6 +2,8 @@
 """ starter file for the application """
 import cmd
 import sys
+from models.task import Task
+from models import storage
 
 
 class TaskCLI(cmd.Cmd):
@@ -21,7 +23,11 @@ class TaskCLI(cmd.Cmd):
         args = args.split()
 
         if len(args) >= 2:
-            pass
+            new_task = Task(args[0])
+            storage.new(new_task)
+            storage.save()
+
+            print(f"Task saved with id: {new_task.id}")
 
 
 if __name__ == '__main__':
