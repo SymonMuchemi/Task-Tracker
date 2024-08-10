@@ -9,20 +9,9 @@ class Task:
     __no_of_tasks = 0
     
     def __init__(self, description, status="not done"):
-        """
-        Initializes a Task object.
-        Parameters:
-        - description (str): The description of the task.
-        - status (str, optional): The status of the task. Defaults to "not done".
-        Attributes:
-        - status (str): The status of the task.
-        - id (str): The unique identifier of the task.
-        - description (str): The description of the task.
-        - created_at (datetime): The date and time when the task was created.
-        - updated_at (datetime): The date and time when the task was last updated.
-        """
-        self.status = status
+        """ Initializes a Task object """
         self.id = str(uuid.uuid4())
+        self.status = status
         self.description = description
         self.created_at = datetime.now(timezone.utc)
         self.updated_at = self.created_at
@@ -30,4 +19,36 @@ class Task:
         self.__no_of_tasks += 1
 
     def update(self, *args, **kwargs):
-        pass
+        """updates the instance atttibutes
+        """
+        if not kwargs:
+            if len(args) > 0 and args[0] is not None:
+                self.id = args[0]
+            if args[1] is not None and isinstance(args[1], str):
+                self.description = args[1]
+            if args[2] is not None and isinstance(args[2], str):
+                self.status = args[2]
+            if args[3] is not None and isinstance(args[3], datetime):
+                self.created_at = args[3]
+            if args[4] is not None and isinstance(args[4], datetime):
+                self.created_at = args[4]
+        else:
+            for key, val in kwargs.items():
+                if key == "updated_at" or "created_at":
+                    val = datetime.strptime(kwargs["updated_at"],
+                                            '%Y-%m-%dT%H:%M:%S.%f')
+
+    def to_dict(self):
+        """returns a dictionary version of the instance
+        with the description as key
+
+        Returns:
+            dict: dictionary version of the instance
+        """
+        return {
+            "id": self.id,
+            "description": self.description,
+            "status": self.status,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }
