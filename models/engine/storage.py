@@ -1,21 +1,24 @@
 #!/usr/bin/python3
 """ storage module """
 import json
+from ..task import Task
 
 
 class File_storage:
     __file_path = 'tasks.json'
     __objects = {}
     
-    def all(self):  
+    def all(self, id=None):  
         """returns all the objects stored in the objects dictionary
 
         Returns:
             dict: dictionary of objects
         """
-        return {
-            key: val for key, val in File_storage.__objects.items()
-        }
+        if id is not None:
+            return {
+                key: val for key, val in File_storage.__objects.items() if key == str(id)
+            }
+        return self.__objects
 
     def new(self, obj):
         """adds a new object to the objects dict
@@ -27,6 +30,13 @@ class File_storage:
             key = obj.id
             self.__objects[key] = obj
 
+    def load(self):
+        """Loads storage from file"""
+        with open(File_storage.__file_path, 'r') as file:
+            temp_dict = json.load(file)
+            for key, val in temp_dict.items():
+                File_storage.__objects[key] = Task.from_dict(val)
+    
     def save(self):
         """save storage to file"""
         objects = {}
