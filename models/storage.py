@@ -24,7 +24,7 @@ class File_storage:
             obj (dict): object to be added
         """
         if obj is not None:
-            File_storage.__objects.all().update(
+            self.all().update(
                 {
                     obj.to_dict()['description']: obj
                 }
@@ -37,5 +37,5 @@ class File_storage:
             temp_dict.update(File_storage.__objects)
             for key, val in temp_dict:
                 temp_dict[key] = val.to_dict()
-            json.dump(temp_dict)
+            json.dump(temp_dict, file)
             
