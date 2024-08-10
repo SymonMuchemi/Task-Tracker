@@ -16,6 +16,7 @@ class TaskCLI(cmd.Cmd):
 
     def do_EOF(self):
         """Exits the console application"""
+        storage.save()
         return True
 
     def do_add(self, args):
@@ -27,8 +28,25 @@ class TaskCLI(cmd.Cmd):
             storage.reload()
             storage.new(new_task)
             storage.save()
-
             print(f"Task saved with id: {new_task.id}")
+
+    def do_update(self, args):
+        """updates the description of a task
+        
+        usage: update <id> <new description>
+        """
+        if len(args.split()) > 1:
+            id = args.split()[0]
+            new_description = args.split()[1]
+            task = storage.all(id)
+            storage.new(task)
+            storage.save()
+        
+            if task is not None and args is not None:
+                task['description'] = new_description
+        else:
+            print(f"Cannot find task!")
+        
 
 
 if __name__ == '__main__':
