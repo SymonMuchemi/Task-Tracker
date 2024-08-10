@@ -30,4 +30,4 @@ class Task:
         self.__no_of_tasks += 1
 
     def update(self, *args, **kwargs):
-        
+        pass
