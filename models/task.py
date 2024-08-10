@@ -13,7 +13,7 @@ class Task:
         self.id = str(uuid.uuid4())
         self.status = status
         self.description = description
-        self.created_at = datetime.now(timezone.utc)
+        self.created_at = str(datetime.now(timezone.utc))
         self.updated_at = self.created_at
         
         self.__no_of_tasks += 1
@@ -37,6 +37,7 @@ class Task:
                 if key == "updated_at" or "created_at":
                     val = datetime.strptime(kwargs["updated_at"],
                                             '%Y-%m-%dT%H:%M:%S.%f')
+                    val = str(val)
 
     def to_dict(self):
         """returns a dictionary version of the instance

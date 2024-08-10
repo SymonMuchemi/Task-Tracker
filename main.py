@@ -20,10 +20,10 @@ class TaskCLI(cmd.Cmd):
 
     def do_add(self, args):
         """ Adds a new task """
-        args = args.split()
+        desc = args.replace('"', '')
 
         if len(args) >= 2:
-            new_task = Task(args[0])
+            new_task = Task(description=desc)
             storage.new(new_task)
             storage.save()
 
