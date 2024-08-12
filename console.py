@@ -30,27 +30,6 @@ class TaskCLI(cmd.Cmd):
             storage.save()
             print(f"Task saved with id: {new_task.id}")
 
-    def do_update(self, args):
-        """updates the description of a task
-        
-        usage: update <id> <new description>
-        """
-        if len(args.split()) > 1:
-            id = args.split()[0]
-            new_description = args.split()[1]
-            print(id)
-            print(new_description)
-            print(storage.all(id))
-            task = Task.from_dict(storage.all(id))
-            storage.new(task)
-            storage.save()
-        
-            if task is not None and args is not None:
-                task.update(decription=new_description)
-        else:
-            print(f"Cannot find task!")
-        
-
 
 if __name__ == '__main__':
     TaskCLI().cmdloop()
