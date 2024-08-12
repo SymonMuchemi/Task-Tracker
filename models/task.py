@@ -75,7 +75,6 @@ class Task:
 
     @classmethod
     def from_dict(cls, data):
-        # print(data.items()) # TODO: remove debug line
         return cls(
             id=data.get('id', None),
             description=data.get('description', ''),
@@ -83,3 +82,6 @@ class Task:
             created_at=data.get('created_at', None),
             updated_at=data.get('updated_at', None)
         )
+
+    def __str__(self) -> str:
+        return f"{self.id} {self.status} {self.description}"
