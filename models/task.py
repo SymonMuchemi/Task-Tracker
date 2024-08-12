@@ -14,14 +14,14 @@ class Task:
         """ Initializes a Task object """
         Task.__no_of_tasks += 1
         if kwargs:
-            for key, val in kwargs:
+            for key, val in kwargs.items():
                 if key == "description":
                     self.description = val
                 if key == "status":
-                    self.status == val
-                if key == "created_at":
+                    self.status = val
+                if key == "created_at" and val is not None:
                     self.created_at = datetime.strptime(val, time_format)
-                if key == "updated_at":
+                if key == "updated_at" and val is not None:
                     self.created_at = datetime.strptime(val, time_format)
         else:
             self.id = self.__no_of_tasks
@@ -75,9 +75,11 @@ class Task:
 
     @classmethod
     def from_dict(cls, data):
+        # print(data.items()) # TODO: remove debug line
         return cls(
-            id=data['id'],
-            description=data["description"],
-            created_at=datetime.fromisoformat(data['created_at']),
-            updated_at=datetime.fromisoformat(data['updated_at'])
+            id=data.get('id', None),
+            description=data.get('description', ''),
+            status=data.get('status', ''),
+            created_at=data.get('created_at', None),
+            updated_at=data.get('updated_at', None)
         )
