@@ -1,0 +1,33 @@
+name: ci pipeline
+on:
+    push:
+        branches:
+            - master
+            - marking
+            - listing
+    pull_request:
+        branches:
+            - master
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up Python
+              uses: actions/setup-python@v4
+              with:
+                  python-version: 3.11
+
+            - name: Install dependencies
+              run: |
+                    pip install pycodestyle
+            
+            - name: Run unittests
+              run: |
+                  python3 -m unittest discover tests
+
+            - name: run pycodestyle
+              run: |
+                pycodestyle *.py
