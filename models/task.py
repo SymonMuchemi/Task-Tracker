@@ -13,50 +13,35 @@ class Task:
     def __init__(self, description, *args, **kwargs):
         """ Initializes a Task object """
         Task.__no_of_tasks += 1
-        if kwargs:
-            for key, val in kwargs.items():
-                if key == "description":
-                    self.description = val
-                if key == "status":
-                    self.status = val
-                if key == "created_at" and val is not None:
-                    self.created_at = datetime.strptime(val, time_format)
-                if key == "updated_at" and val is not None:
-                    self.created_at = datetime.strptime(val, time_format)
-        else:
-            self.id = self.__no_of_tasks
-            self.status = "not done"
-            self.description = description
-            self.created_at = str(datetime.now(timezone.utc))
-            self.updated_at = self.created_at
+        self.id = self.__no_of_tasks
+        self.status = "not done"
+        self.description = description
+        self.created_at = str(datetime.now(timezone.utc))
+        self.updated_at = self.created_at
+
+        for key, val in kwargs.items():
+            if key == "description":
+                self.description = val
+            if key == "status":
+                self.status = val
+            if key == "created_at" and val is not None:
+                self.created_at = datetime.strptime(val, time_format)
+            if key == "updated_at" and val is not None:
+                self.created_at = datetime.strptime(val, time_format)
         
 
     def update(self, *args, **kwargs):
         """updates the instance atttibutes
         """
-        if not kwargs:
-            if len(args) > 0 and args[0] is not None:
-                self.id = args[0]
-            if args[1] is not None and isinstance(args[1], str):
-                self.description = args[1]
-            if args[2] is not None and isinstance(args[2], str):
-                self.status = args[2]
-            if args[3] is not None and isinstance(args[3], datetime):
-                self.created_at = args[3]
-            if args[4] is not None and isinstance(args[4], datetime):
-                self.created_at = args[4]
-        else:
-            for key, val in kwargs.items():
-                if key == "updated_at" or "created_at":
-                    val = datetime.strptime(kwargs["updated_at"],
-                                            '%Y-%m-%dT%H:%M:%S.%f')
-                    val = str(val)
-                if key == "description":
-                    self.description = val
-                if key == "id":
-                    self.id = val
-                if key == "status":
-                    self.status = val
+        for key, val in kwargs.items():
+            if key == "description":
+                self.description = val
+            if key == "status":
+                self.status = val
+            if key in ["created_at", "updated_at"] and val is not None:
+                val = datetime.strptime(val, time_format)
+                setattr(self, key, val.strftime(time_format))
+            self.updated_at = datetime.now(timezone.utc).strftime(time_format)
 
     def to_dict(self):
         """returns a dictionary version of the instance
@@ -75,8 +60,15 @@ class Task:
 
     @classmethod
     def from_dict(cls, data):
+        """creates a Task object from a dictionary
+
+        Args:
+            data (dic): the data dictionary
+
+        Returns:
+            Task: new task object
+        """
         return cls(
-            id=data.get('id', None),
             description=data.get('description', ''),
             status=data.get('status', ''),
             created_at=data.get('created_at', None),

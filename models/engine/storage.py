@@ -16,7 +16,7 @@ class File_storage:
         """
         if id is not None:
             return {
-                key: val for key, val in File_storage.__objects.items() if key == str(id)
+                key: val for key, val in File_storage.__objects.items() if key == int(id)
             }
         return self.__objects
 
@@ -32,30 +32,20 @@ class File_storage:
 
     def load(self):
         """Loads storage from file"""
-        with open(File_storage.__file_path, 'r') as file:
-            temp_dict = json.load(file)
-            for key, val in temp_dict.items():
-                File_storage.__objects[key] = Task.from_dict(val)
+        try:
+            with open(File_storage.__file_path, 'r') as file:
+                temp_dict = json.load(file)
+                for key, val in temp_dict.items():
+                    File_storage.__objects[int(key)] = Task.from_dict(val)
+        except FileNotFoundError:
+            pass
     
     def save(self):
         """save storage to file"""
-        objects = {}
-        for key in self.__objects:
-            objects[key] = self.__objects[key].to_dict()
+        objs = {key: obj.to_dict() for key, obj in self.__objects.items()}
+        
         with open(self.__file_path, 'w+') as file:
-            json.dump(objects, file)
-
-    def reload(self):
-        """deserializes data from the json file"""
-        try:
-            with open(File_storage.__file_path, 'r') as file:
-                objects = json.load(file)
-            for key, val in objects.items():
-                class_name = val['__class__']
-                obj = eval(class_name)(**val)
-                self.__objects[key] = obj
-        except:
-            pass
+            json.dump(objs, file)
 
     def close(self):
         """calls the reload method"""
