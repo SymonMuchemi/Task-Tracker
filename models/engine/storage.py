@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ storage module """
 import json
-from task import Task
+from ..task import Task
 
 
 class File_storage:
