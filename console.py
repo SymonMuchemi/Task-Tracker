@@ -51,15 +51,16 @@ class TaskCLI(cmd.Cmd):
     def do_mark(self, args):
         """Changes the status of a task"""
         args = args.split()
-        
+
         if len(args) < 2:
             print("Usage: mark <id> <new status>")
-        
+
         task_id = int(args[0])
         new_status = args[1].lower()
-        
+
         if new_status not in states:
-            print("Invalid status! status must be:not done, done or in progress")
+            print("Invalid status!", end='')
+            print(" status must be:not done, done or in progress")
 
         tasks = storage.all(id=task_id)
         if tasks:
@@ -69,6 +70,7 @@ class TaskCLI(cmd.Cmd):
             print(f"Task {task_id} updated to {new_status}")
         else:
             print(f"No task found with id {task_id}")
+
 
 if __name__ == '__main__':
     TaskCLI().cmdloop()
