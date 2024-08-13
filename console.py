@@ -42,5 +42,6 @@ class TaskCLI(cmd.Cmd):
             for key, task in all_tasks.items():
                 print(task)
 
+
 if __name__ == '__main__':
     TaskCLI().cmdloop()
