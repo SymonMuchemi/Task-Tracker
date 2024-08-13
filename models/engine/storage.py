@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ storage module """
 import json
-from ..task import Task
+from task import Task
 
 
 class File_storage:
@@ -16,7 +16,7 @@ class File_storage:
         """
         if id is not None:
             return {
-                key: val for key, val in File_storage.__objects.items() if key == str(id)
+                key: val for key, val in File_storage.__objects.items() if key == int(id)
             }
         return self.__objects
 
