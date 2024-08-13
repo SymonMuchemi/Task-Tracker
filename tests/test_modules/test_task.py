@@ -6,6 +6,8 @@ from models.task import Task
 from datetime import datetime
 from datetime import timedelta
 
+time_format = "%Y-%m-%dT%H:%M:%S"
+
 
 class TestTask(unittest.TestCase):
     __file_path = 'test_data.json'
@@ -36,7 +38,6 @@ class TestTask(unittest.TestCase):
     def test_attribute_types(self):
         """checks the types """
         self.assertIsInstance(TestTask.new.description, str)
-        self.assertIsInstance(TestTask.new.id, str)
-        self.assertIsInstance(TestTask.new.created_at, datetime)
-        self.assertIsInstance(TestTask.new.updated_at, datetime)
-        
+        self.assertIsInstance(TestTask.new.id, int)
+        self.assertIsInstance(TestTask.new.created_at, str)
+        self.assertIsInstance(TestTask.new.updated_at, str)
