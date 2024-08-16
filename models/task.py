@@ -76,4 +76,4 @@ class Task:
         )
 
     def __str__(self) -> str:
-        return f"{self.id} {self.status} {self.description}"
+        return f"[{self.id}] {self.description} ({self.status})"
