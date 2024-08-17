@@ -25,10 +25,9 @@ class Task:
             if key == "status":
                 self.status = val
             if key == "created_at" and val is not None:
-                self.created_at = datetime.strptime(val, time_format)
+                self.created_at = val
             if key == "updated_at" and val is not None:
-                self.created_at = datetime.strptime(val, time_format)
-        
+                self.updated_at = val
 
     def update(self, *args, **kwargs):
         """updates the instance atttibutes
@@ -63,7 +62,7 @@ class Task:
         """creates a Task object from a dictionary
 
         Args:
-            data (dic): the data dictionary
+            data (dict): the data dictionary
 
         Returns:
             Task: new task object
@@ -71,8 +70,8 @@ class Task:
         return cls(
             description=data.get('description', ''),
             status=data.get('status', ''),
-            created_at=data.get('created_at', None),
-            updated_at=data.get('updated_at', None)
+            created_at=data.get('created_at'),
+            updated_at=data.get('updated_at')
         )
 
     def __str__(self) -> str:
