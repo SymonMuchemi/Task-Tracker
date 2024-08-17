@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ starter file for the application """
 import cmd
-import sys
 from models.task import Task
 from models import storage
 
