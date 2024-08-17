@@ -42,10 +42,23 @@ class TaskCLI(cmd.Cmd):
         """list tasks
         usage: list
         """
+        args = args.split()
         all_tasks = storage.all()
-        print("ID Status Description")
-        for task in all_tasks.values():
-            print(task)
+        filtered_tasks = []
+        
+        if len(args) == 0:
+            print("ID Status Description")
+            for task in all_tasks.values():
+                print(task)
+
+        else:
+            query_status = args[0].lower()
+            if query_status in states:
+                for task in all_tasks.values():
+                    if task.status == query_status:
+                        filtered_tasks.append(task)
+                for task in filtered_tasks:
+                    print(task)
 
     def do_mark(self, args):
         """Changes the status of a task"""
