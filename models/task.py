@@ -14,7 +14,7 @@ class Task:
         """ Initializes a Task object """
         Task.__no_of_tasks += 1
         self.id = self.__no_of_tasks
-        self.status = "not done"
+        self.status = "not-done"
         self.description = description
         self.created_at = str(datetime.now(timezone.utc))
         self.updated_at = self.created_at
