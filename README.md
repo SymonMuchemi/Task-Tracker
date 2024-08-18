@@ -44,8 +44,8 @@ To use the app:
 - [x] Updating task descriptions
 - [x] Marking task as 'done', 'not-done' or 'in-progress'
 - [x] Listing all done tasks
-- [ ] Listing all in-progress tasks
-- [ ] Listing all incomplete tasks
+- [x] Listing all in-progress tasks
+- [x] Listing all incomplete tasks
 
 ## Contributing to Task-Tracker
 
