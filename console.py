@@ -4,7 +4,7 @@ import cmd
 from models.task import Task
 from models import storage
 
-states = ['not-done', 'done', 'in-progress']
+states = ['not-done', 'done', 'in progress']
 
 
 class TaskCLI(cmd.Cmd):
@@ -61,7 +61,9 @@ class TaskCLI(cmd.Cmd):
                     print(task)
 
     def do_mark(self, args):
-        """Changes the status of a task"""
+        """Changes the status of a task
+        Usage: mark <id> <done|in-progress|not-done>
+        """
         args = args.split()
 
         if len(args) < 2:
@@ -69,6 +71,7 @@ class TaskCLI(cmd.Cmd):
 
         task_id = int(args[0])
         new_status = args[1].lower()
+        new_status = new_status.replace('-', ' ')
 
         if new_status not in states:
             print("Invalid status!", end='')
