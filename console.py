@@ -4,7 +4,7 @@ import cmd
 from models.task import Task
 from models import storage
 
-states = ['not-done', 'done', 'in progress']
+states = ['not-done', 'done', 'in-progress']
 
 
 class TaskCLI(cmd.Cmd):
@@ -71,7 +71,6 @@ class TaskCLI(cmd.Cmd):
 
         task_id = int(args[0])
         new_status = args[1].lower()
-        new_status = new_status.replace('-', ' ')
 
         if new_status not in states:
             print("Invalid status!", end='')
