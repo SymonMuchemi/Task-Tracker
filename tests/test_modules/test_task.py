@@ -12,7 +12,7 @@ class TestTask(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.time_now = datetime.now()
-        cls.new = Task("Check attributes", status="not done")
+        cls.new = Task("Check attributes", status="not-done")
 
 
     def tearDown(self) -> None:
@@ -57,7 +57,7 @@ class TestTask(unittest.TestCase):
         task_dict = task.to_dict()
         self.assertIsInstance(task_dict, dict)
         self.assertEqual(task_dict['description'], "Test the to_dict method")
-        self.assertEqual(task_dict["status"], "not done")
+        self.assertEqual(task_dict["status"], "not-done")
         self.assertIn('id', task_dict)
         self.assertIn('created_at', task_dict)
         self.assertIn('updated_at', task_dict)
