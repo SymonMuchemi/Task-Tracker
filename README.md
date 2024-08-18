@@ -3,6 +3,7 @@
 Task-tracker is a commandline interface application to help user manage and track their tasks efficiently. It allows users to store, update and monitor tasks using straight forward commands.
 
 ![Terminal screenshot](task-tracker.png)
+
 ## Prerequisites
 
 Before you begin ensure your computer has the following installed:
@@ -23,11 +24,15 @@ To install Task-Tracker, follow these steps:
 ## Using Task-Tracker
 
 To use the app:
+
 1. move to the directory created after cloning:
+
    ```shell
    cd Task-Tracker
    ```
+
 2. Run the console module:
+
    ```shell
    ./console
    ```
@@ -57,6 +62,3 @@ Alternatively see the GitHub documentation on [creating a pull request](https://
 Thanks to the following people who have contributed to this project:
 
 - [@SymonMuchemi](https://www.github.com/symonmuchemi)
-
-## License
-
