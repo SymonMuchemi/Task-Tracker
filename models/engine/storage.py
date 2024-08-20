@@ -50,3 +50,15 @@ class File_storage:
     def close(self):
         """calls the reload method"""
         self.reload()
+
+    def delete(self, obj):
+        """deletes obj from storage"""
+        if obj is not None:
+            key_to_del = None
+            for key, val in self.__objects.items():
+                if val == obj:
+                    key_to_del = key
+                    break
+            if key_to_del is not None:
+                del self.__objects[key_to_del]
+                self.save()

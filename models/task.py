@@ -74,5 +74,10 @@ class Task:
             updated_at=data.get('updated_at')
         )
 
+    def delete(self):
+        """deletes instance from storage"""
+        from models import storage
+        storage.delete(self)
+
     def __str__(self) -> str:
         return f"[{self.id}] {self.description} ({self.status})"
