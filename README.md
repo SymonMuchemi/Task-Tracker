@@ -2,6 +2,8 @@
 
 Task-tracker is a commandline interface application to help user manage and track their tasks efficiently. It allows users to store, update and monitor tasks using straight forward commands.
 
+![Task tracker screenshot](./images/task-tracker.png)
+
 ## Prerequisites
 
 Before you begin ensure your computer has the following installed:
@@ -27,6 +29,17 @@ To use the app move to the directory created after cloning:
 cd Task-Tracker
 ```
 
+## Features
+
+- [x] Adding tasks
+- [x] Storing tasks
+- [x] Updating task descriptions
+- [x] Marking task as 'done', 'not-done' or 'in-progress'
+- [x] Listing all done tasks
+- [x] Listing all in-progress tasks
+- [x] Listing all incomplete tasks
+- [ ] Deleting tasks
+
 ## Contributing to Task-Tracker
 
 1. Fork this repository.
@@ -37,11 +50,6 @@ cd Task-Tracker
 
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)
 
-## Contributors
+## Source
 
-Thanks to the following people who have contributed to this project:
-
-- [@SymonMuchemi](https://www.github.com/symonmuchemi)
-
-## License
-
+The idea for this project is sourced from [Roadmap sh](https://roadmap.sh/projects/task-tracker)
