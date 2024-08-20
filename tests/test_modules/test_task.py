@@ -24,6 +24,15 @@ class TestTask(unittest.TestCase):
         if os.path.isfile(TestTask.__file_path):
             os.remove(TestTask.__file_path)
 
+    def test_id_increments(self):
+        """check to see if ID increments"""
+        t1 = Task("One")
+        t2 = Task("Two")
+        
+        id_difference = t2.id - t1.id
+        
+        self.assertEqual(id_difference, 1)
+
     def test_attributes(self):
         """checks file attributes """
         
@@ -74,3 +83,6 @@ class TestTask(unittest.TestCase):
         self.assertEqual(task.status, "done")
         self.assertEqual(task.created_at, "2024-01-01T00:00:00")
         self.assertEqual(task.updated_at, "2024-01-02T00:00:00")
+
+if __name__ == '__main__':
+    unittest.main()
