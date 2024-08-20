@@ -44,7 +44,7 @@ cd Task-Tracker
 
 1. Fork this repository.
 2. Create a new branch: `git checkout -b <branch_name>`
-3. Make your changes and commit them: `git commit -am '<commit message>`
+3. Make your changes and commit them: `git commit -am '<commit message>'`
 4. Push you changes to the original branch: `git push origin master`
 5. Create a pull request
 
